@@ -20,11 +20,29 @@ namespace LabPOO
             this.price = price;
             this.unit = unit;
         }
-
-        public bool Agregar(List<Product> carrito)
+        public void suscribe()
+        {
+            yachekeado += new Chekeoprevioainsertar(enproductonoenlista);
+        }
+        public delegate void Chekeoprevioainsertar(List<Product> carrito, List<Product> lista);
+        public event Chekeoprevioainsertar yachekeado;
+        public virtual void enproductonoenlista(List<Product> carrito, List<Product> lista)
+        {
+            if (lista.Contains(this))
+            {
+               
+            }
+            else
+            {
+                carrito.Remove(this);
+            }
+          
+        }
+        public bool Agregar(List<Product> carrito, List<Product> lista)
         {
             if (stock > 0)
             {
+                
                 carrito.Add(this);
                 stock--;
                 return true;

@@ -11,11 +11,13 @@ namespace LabPOO
     {
         public static List<Product> cart;
         public static List<Product> market;
+        public static List<Product> lista;
 
         static void Main(string[] args)
         {
             cart = new List<Product>();
             market = new List<Product>();
+            lista = new List<Product>();
             SupplyStore();
             while (true)
             {
@@ -37,6 +39,7 @@ namespace LabPOO
                     else if (answer == "2")
                     {
                         WalkAround();
+
                         break;
                     }
                     else if (answer == "3")
@@ -92,14 +95,16 @@ namespace LabPOO
                     {
                         continue;
                     }
-                    AddToCart(market[answer]);
+                    cart.Add(market[answer]);
+                    market[answer].enproductonoenlista(cart,lista);
                     break;
                 }
                 catch
                 {
                     continue;
                 }
-            }           
+            }
+            
         }
 
         public static void PrintCart()
@@ -129,36 +134,72 @@ namespace LabPOO
             Console.WriteLine("\t\t LIDER\n");
         }
 
-        public static bool AddToCart(Product product)
-        {
-            return product.Agregar(cart);
-        }
+        
 
         public static void SupplyStore()
         {
-            market.Add(new Product("Leche Entera", 820, 89, "1L"));
-            market.Add(new Product("Gomitas Flipy", 720, 12, "100g"));
-            market.Add(new Product("Mantequilla", 850, 12, "125g"));
-            market.Add(new Product("Crema para hemorroides", 4990, 7, "300cc"));
-            market.Add(new Product("Pimienta", 430, 84, "15g"));
-            market.Add(new Product("Vino Sauvignon Blanc Reserva Botella", 4150, 23, "750cc"));
-            market.Add(new Product("Sal Lobos", 330, 150, "1kg"));
-            market.Add(new Product("Cuaderno Mi Pequeño Pony", 1290, 50, "1un"));
-            market.Add(new Product("Láminas de Lasaña", 1250, 85, "400g"));
-            market.Add(new Product("Tomate", 1290, 200, "1kg"));
-            market.Add(new Product("Harina", 890, 43, "1kg"));
-            market.Add(new Product("Audifonos Samsung", 5990, 40, "1un"));
-            market.Add(new Product("Pisco Alto del Carmen", 5990, 120, "1L"));
-            market.Add(new Product("Carne Molida", 4390, 15, "500g"));
-            market.Add(new Product("Aceite de Oliva", 1790, 77, "250g"));
-            market.Add(new Product("Sal parrillera", 840, 50, "750g"));
-            market.Add(new Product("Cable HDMI 1m", 3990, 25, "1un"));
-            market.Add(new Product("Queso Rallado Parmesano", 499, 102, "40g"));
-            market.Add(new Product("Vino Blanco Caja", 2790, 84, "2L"));
-            market.Add(new Product("Malla de Cebollas", 1090, 91, "1kg"));
-            market.Add(new Product("Tomates Pelados en lata", 700, 48, "540g"));
-            market.Add(new Product("Queso Parmesano", 3790, 41, "200g"));
-            market.Add(new Product("Bolsa de Zanahorias", 890, 74, "1un"));
+            Product leche_entera = new Product("Leche Entera", 820, 89, "1L");
+            market.Add(leche_entera);
+            Product gomitas_flipy = new Product("Gomitas Flipy", 720, 12, "100g");
+            market.Add(gomitas_flipy);
+            Product mantequilla = new Product("Mantequilla", 850, 12, "125g");
+            market.Add(mantequilla);
+            Product crema_para_hemorroides = new Product("Crema para hemorroides", 4990, 7, "300cc");
+            market.Add(crema_para_hemorroides);
+            Product pimienta = new Product("Pimienta", 430, 84, "15g");
+            market.Add(pimienta);
+            Product vino_sauvignion = new Product("Vino Sauvignon Blanc Reserva Botella", 4150, 23, "750cc");
+            market.Add(vino_sauvignion);
+            Product sal_lobos = new Product("Sal Lobos", 330, 150, "1kg");
+            market.Add(sal_lobos);
+            Product cuaderno = new Product("Cuaderno Mi Pequeño Pony", 1290, 50, "1un");
+            market.Add(cuaderno);
+            Product laminas_de_lasagna = new Product("Láminas de Lasaña", 1250, 85, "400g");
+            market.Add(laminas_de_lasagna);
+            Product tomate = new Product("Tomate", 1290, 200, "1kg");
+            market.Add(tomate);
+            Product harina = new Product("Harina", 890, 43, "1kg");
+            market.Add(harina);
+            Product audifonos_samsung = new Product("Audifonos Samsung", 5990, 40, "1un");
+            market.Add(audifonos_samsung);
+            Product pisco_alto = new Product("Pisco Alto del Carmen", 5990, 120, "1L");
+            market.Add(pisco_alto);
+            Product carne_molida = new Product("Carne Molida", 4390, 15, "500g");
+            market.Add(carne_molida);
+            Product aceite_oliva = new Product("Aceite de Oliva", 1790, 77, "250g");
+            market.Add(aceite_oliva);
+            Product sal_parrillera = new Product("Sal parrillera", 840, 50, "750g");
+            market.Add(sal_parrillera);
+            Product hdmi = new Product("Cable HDMI 1m", 3990, 25, "1un");
+            market.Add(hdmi);
+            Product queso_rallado = new Product("Queso Rallado Parmesano", 499, 102, "40g");
+            market.Add(queso_rallado);
+            Product vino_caja = new Product("Vino Blanco Caja", 2790, 84, "2L");
+            market.Add(vino_caja);
+            Product malla_cebolla = new Product("Malla de Cebollas", 1090, 91, "1kg");
+            market.Add(malla_cebolla);
+            Product tomates_pelados = new Product("Tomates Pelados en lata", 700, 48, "540g");
+            market.Add(tomates_pelados);
+            Product queso_parmesano = new Product("Queso Parmesano", 3790, 41, "200g");
+            market.Add(queso_parmesano);
+            Product bolsa_zanahorias = new Product("Bolsa de Zanahorias", 890, 74, "1un");
+            market.Add(bolsa_zanahorias);
+            lista.Add(laminas_de_lasagna);
+            lista.Add(queso_rallado);
+            lista.Add(queso_rallado);
+            lista.Add(mantequilla);
+            lista.Add(carne_molida);
+            lista.Add(vino_caja);
+            lista.Add(tomates_pelados);
+            lista.Add(bolsa_zanahorias);
+            lista.Add(malla_cebolla);
+            lista.Add(aceite_oliva);
+            lista.Add(sal_lobos);
+            lista.Add(pimienta);
+            lista.Add(mantequilla);
+            lista.Add(harina);
+            lista.Add(leche_entera);
+            lista.Add(pimienta);
         }
 
         public static void ShowRecipe()
@@ -166,7 +207,10 @@ namespace LabPOO
             Console.Clear();
             Console.WriteLine("\t\t===> Lasagne alla bolognese <===\n");
             Console.WriteLine("Ingredientes básicos:");
-            Console.WriteLine("\t12 láminas de Lasaña");
+            Console.WriteLine("\t12 Láminas de Lasaña");
+           
+
+
             Console.WriteLine("\t70 gramos de parmesano rallado");
             Console.WriteLine("\tMantequilla\n");
             Console.WriteLine("Para el relleno:");
@@ -191,5 +235,6 @@ namespace LabPOO
                 response = Console.ReadKey(true);
             }
         }
+        
     }
 }
